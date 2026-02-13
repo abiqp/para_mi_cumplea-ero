@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Gift</title>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light-blue: #3b48a7; /* Fondo externo */
+            --tablet-white: #ffffff;
+            --main-blue: #4f46e5;    /* Texto azul fuerte */
+            --card-blue: #818cf8;    /* Fondo tarjetas */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--tablet-white);
+            border-radius: 40px;
+            aspect-ratio: 16 / 11;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .active { display: flex; animation: fadeIn 0.5s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .img5 h1 { color: var(--main-blue); font-size: 3rem; margin-bottom: 10px; text-transform: uppercase; }
+        .img5 p { color: var(--main-blue); font-size: 1.1rem; margin-bottom: 40px; font-weight: bold; }
+        .gift-container { width: 280px; cursor: pointer; transition: transform 0.3s ease; }
+        .gift-container:hover { transform: scale(1.05); }
+        .gift-container img { width: 100%; }
+
+        .img4 h2 { color: var(--main-blue); font-size: 2.8rem; text-transform: uppercase; }
+        .subtitle { color: var(--main-blue); font-weight: bold; margin-bottom: 40px; }
+        .menu-grid { display: flex; gap: 20px; justify-content: center; width: 100%; }
+        .menu-card {
+            background: var(--card-blue);
+            width: 220px;
+            height: 280px;
+            border-radius: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .menu-card:hover { transform: translateY(-10px); }
+        .inner-frame {
+            width: 85%; height: 85%;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 4rem;
+        }
+
+        .nav-btn {
+            position: absolute;
+            background: var(--main-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 10;
+        }
+        .back-to-menu { top: 20px; left: 20px; }
+        .back-to-start { bottom: 20px; left: 50%; transform: translateX(-50%); }
+
+        /* --- AJUSTE PARA FOTOS POLAROID --- */
+        .polaroid-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            width: 100%;
+        }
+        .polaroid {
+            background: white;
+            padding: 10px 10px 25px 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+        }
+        /* Clase actualizada para manejar imágenes */
+        .photo-box { 
+            background: #e2e8f0; 
+            width: 100%; 
+            aspect-ratio: 1; 
+            margin-bottom: 8px; 
+            object-fit: cover; /* Centra y recorta la imagen sin estirarla */
+            display: block;
+        }
+        .polaroid span { font-size: 0.6rem; color: var(--main-blue); font-weight: bold; display: block; margin-top: 5px; }
+
+        .video-content { display: flex; gap: 30px; align-items: center; width: 100%; }
+        .player-area { 
+            flex: 2; background: #f8fafc; padding: 20px; border-radius: 25px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 15px; overflow: hidden; }
+
+        .letter-area { display: flex; gap: 30px; width: 100%; text-align: left; }
+        .letter-polaroid { width: 260px; background: white; padding: 15px 15px 50px 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .letter-text { 
+            flex: 1; overflow-y: auto; max-height: 400px; padding-right: 15px;
+            color: #334155; line-height: 1.5; font-size: 0.95rem;
+        }
+        .letter-text h3 { color: var(--main-blue); margin-bottom: 15px; font-size: 1.6rem; }
+
+        @media (max-width: 768px) {
+            .menu-grid { flex-direction: column; align-items: center; }
+            .menu-card { width: 80%; height: 120px; }
+            .polaroid-grid { grid-template-columns: repeat(2, 1fr); }
+            .letter-area { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+
+    <div id="screen5" class="screen active img5">
+        <h1>HAPPY BIRTHDAY JAVA!</h1>
+        <p>CLICK THE GIFT TO OPEN YOUR SURPRISE</p>
+        <div class="gift-container" onclick="nav('screen4')">
+            <img src="https://cdn-icons-png.flaticon.com/512/4213/4213958.png" alt="Regalo">
+        </div>
+    </div>
+
+    <div id="screen4" class="screen img4">
+        <h2>PRESENTS FOR YOU</h2>
+        <p class="subtitle">CLICK ANY GIFT TO OPEN</p>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="nav('screen3')"><div class="inner-frame">📸</div></div>
+            <div class="menu-card" onclick="nav('screen2')"><div class="inner-frame">💿</div></div>
+            <div class="menu-card" onclick="nav('screen1')"><div class="inner-frame">✉️</div></div>
+        </div>
+        <button class="nav-btn back-to-start" onclick="nav('screen5')">Volver al inicio</button>
+    </div>
+
+    <div id="screen3" class="screen">
+        <button class="nav-btn back-to-menu" onclick="nav('screen4')">Volver</button>
+        <div class="polaroid-grid">
+            <div class="polaroid"><img src="Imagenes/imagen.jpeg" class="photo-box"><span>NUESTRO INICIO</span></div>
+            <div class="polaroid"><img src="Imagenes/imagen2.jpeg" class="photo-box"><span>TU SONRISA</span></div>
+            <div class="polaroid"><img src="Imagenes/imagen3.jpeg" class="photo-box"><span>SIEMPRE JUNTOS</span></div>
+            <div class="polaroid"><img src="Imagenes/imagen4.jpeg" class="photo-box"><span>TU TRANQUILIDAD</span></div>
+            <div class="polaroid"><img src="Imagenes/imagen5.jpeg" class="photo-box"><span>AVENTURAS</span></div>
+            <div class="polaroid"><img src="Imagenes/imagen6.jpeg" class="photo-box"><span>ERES LO MAXIMO</span></div>
+            <div class="polaroid"><img src="Imagenes/imagen7.jpeg" class="photo-box"><span>TE AMO</span></div>
+            <div class="polaroid"><img src="Imagenes/imagen8.jpeg" class="photo-box"><span>POR SIEMPRE</span></div>
+        </div>
+    </div>
+
+    <div id="screen2" class="screen">
+        <button class="nav-btn back-to-menu" onclick="nav('screen4')">Volver</button>
+        <div class="video-content">
+            <img src="https://cdn-icons-png.flaticon.com/512/3566/3566509.png" width="160" alt="Flores">
+            <div class="player-area">
+                <div class="video-box">
+                    <iframe width="100%" height="100%" 
+                        src="https://www.youtube.com/embed/-D_CivXVjzg" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p style="margin-top:10px; font-weight:bold;">🎵 Somos</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="screen1" class="screen">
+        <button class="nav-btn back-to-menu" onclick="nav('screen4')">Volver</button>
+        <div class="letter-area">
+            <div class="letter-polaroid">
+                <img src="Imagenes/imagen_especial.png" class="photo-box" style="height: 240px;">
+            </div>
+            <div class="letter-text">
+                <h3>HAPPY BIRTHDAY, MY LOVE!</h3>
+                <p>Hoy celebramos a ti, el hombre hermoso que hace que mi mundo sea unico simplemente por estar en él. Desde el momento en que nos conocimos, todas mis preocupaciones se desvanecieron, y supe que todos a nuestro alrededor podían ver algo diferente en nuestra conexión. Son las pequeñas cosas, los dulces momentos y los gestos amables los que me hacen sentir infinitamente agradecida y me recuerdan lo especial que soy de tenerte. Eres la persona con la que quiero compartir todo: las risas, los enojos, las aventuras e incluso los momentos tranquilos que pasamos juntos. Eres la razón por la que mis días se sienten más especiales, felices y completos.</p>
+                <br>
+                <p>Al comenzar otro año de vida, solo quiero que sepas lo profundamente que eres amado y apreciado. Prometo seguir a tu lado, animándote y amándote en cada temporada que venga. Gracias por ser mi amigo, mi amor, mi alegría, mi inspiración y mi mayor bendición. Brindemos por celebrarte hoy y por todos los hermosos recuerdos que hemos creado y seguiremos creando. No importa lo que depare el futuro, siempre estaré aquí, amándote ayer y hoy.</p>
+                <br>
+                <p><b>Sincerely yours, your love ✨❤️</b></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function nav(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+</script>
+
+</body>
+</html>
